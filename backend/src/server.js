@@ -4,8 +4,14 @@ const app = express();
 
 // Métodos Http Padrão. GET, POST, PUT, DELETE
 
-app.get('/', (req, res) => {
-    return res.json({ message: "Hello World" });
+// req.query  = Aacessar query params (para filtros)
+// req.params = Acessar route params (para edição, delete)
+// req.body = Acessar corpo da requisição (para criação e edição)
+
+app.use(express.json());
+
+app.post('/users', (req, res) => {
+    return res.json(req.body);
 });
 
 app.listen(3333);
