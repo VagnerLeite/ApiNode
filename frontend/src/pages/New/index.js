@@ -9,11 +9,11 @@ export default function New({ history }) {
   const [thumbnail, setThumbnail] = useState(null);
   const [company, setCompany] = useState('');
   const [techs, setTechs] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState('');  
 
   const preview = useMemo(() => {
     return thumbnail ? URL.createObjectURL(thumbnail) : null;
-  }, [thumbnail])
+  }, [thumbnail]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -28,7 +28,7 @@ export default function New({ history }) {
 
     await api.post('/spots', data, {
       headers: { user_id }
-    })
+    });
 
     history.push('/dashboard');
   }
@@ -41,34 +41,33 @@ export default function New({ history }) {
         className={thumbnail ? 'has-thumbnail' : ''}
       >
         <input type="file" onChange={event => setThumbnail(event.target.files[0])} />
-        <img src={camera} alt="Select img" />
+        <img src={camera} alt="Select img"/>
       </label>
 
       <label htmlFor="company">EMPRESA *</label>
-      <input 
+      <input
         id="company"
-        placeholder="Sua empresa incrível"
+        placeholder="Sua Empresa"
         value={company}
         onChange={event => setCompany(event.target.value)}
       />
 
       <label htmlFor="techs">TECNOLOGIAS * <span>(separadas por vírgula)</span></label>
-      <input 
+      <input
         id="techs"
-        placeholder="Quais tecnologias usam?"
+        placeholder="Quais Tecnologias Usam?"
         value={techs}
         onChange={event => setTechs(event.target.value)}
       />
 
       <label htmlFor="price">VALOR DA DIÁRIA * <span>(em branco para GRATUITO)</span></label>
-      <input 
-        id="price"
+      <input
+        id="proce"
         placeholder="Valor cobrado por dia"
         value={price}
         onChange={event => setPrice(event.target.value)}
       />
-
-      <button type="submit" className="btn">Cadastrar</button>
+      <button className="btn">Cadastrar</button>
     </form>
-  )
+  )    
 }
